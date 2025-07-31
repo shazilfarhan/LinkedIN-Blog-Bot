@@ -49,5 +49,11 @@ def drop_table():
     conn.commit()
     conn.close()
 
-
+def getAnySummary():
+    conn = sqlite3.connect("articles.db")
+    c = conn.cursor()
+    c.execute("SELECT summary from articles")
+    summary = c.fetchone()
+    conn.close()
+    return summary
 

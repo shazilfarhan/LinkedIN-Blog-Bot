@@ -4,6 +4,7 @@ from scraper import *
 from llm_client import *
 from email_summary import *
 from linkedIN_prep import format
+from quiz_taker import quizEngine
 
 
 interests = ["spring boot", "system design", "LLM", "vector db", "kubernetes", "aws", "java"]
@@ -34,16 +35,23 @@ rss_feeds = {
 }
 
 
-init_db()
-articles = fetch_articles_by_interest(rss_feeds, interests)
-chosen = select_one_article(articles)
-save_article(chosen)
-chosen_text = extract_article_text(chosen['url'])
-update_full_text(chosen['url'],chosen_text)
-summary =summarize_article(chosen_text)
-send_email('LinkedIN Post for article '+ chosen['title'], format(summary,chosen['url']))
-print('done')
+def main():
 
+    init_db()
+    articles = fetch_articles_by_interest(rss_feeds, interests)
+    chosen = select_one_article(articles)
+    chosen_text = extract_article_text(chosen['url'])
+    summary =summarize_article(chosen_text)
+    if(quizEngine(chosen_text, chosen['url'])):
+        send_email('LinkedIN Post for article '+ chosen['title'], format(summary,chosen['url']))
+        save_article(chosen)
+        update_full_text(chosen['url'],chosen_text)
+
+
+    else:
+        print("You didnt read the article. You wont get the summary")
+
+main()
 
 
 
