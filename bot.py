@@ -46,10 +46,10 @@ def main():
         send_email('LinkedIN Post for article '+ chosen['title'], format(summary,chosen['url']))
         save_article(chosen)
         update_full_text(chosen['url'],chosen_text)
-
+        print('Email sent!')
 
     else:
-        print("You didnt read the article. You wont get the summary")
+        print("You didnt read/understand the article. You wont get the summary")
 
 main()
 

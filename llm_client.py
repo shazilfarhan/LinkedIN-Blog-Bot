@@ -20,7 +20,6 @@ def summarize_article(article_text):
 
 def generate_mcqs(text):
 
-    print('calling ')
     prompt = f"""
     Based on the following content, generate 10 multiple-choice question with 4 options.
     Return in this JSON FORMAT [
