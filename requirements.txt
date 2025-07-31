@@ -1,0 +1,8 @@
+openai
+chromadb
+sentence-transformers
+tqdm
+python-dotenv
+sqlight-utils
+feedparser
+newspaper3k
